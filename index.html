@@ -1,49 +1,284 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+	<title>RSS Angular</title>
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/black.css">
+	<link rel="stylesheet" href="css/custom.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section id="introduction">
+				<section>
+					<h1>Angular</h1>
+					<img class="logo" src="./images/logo.png" width="500" height="500" alt="angular-logo" />
+				</section>
+				<section>
+					<h2>What is Angular</h2>
+					<ul>
+						<li>Angular is a platform that makes it easy to build applications with the web.</li>
+						<li class="fragment">Developed by Google</li>
+						<li class="fragment">Uses <a href="http://www.typescriptlang.org/">TypeScript</a> language</li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>Why TypeScript</h3>
+				</section>
+				<section id="typescript">
+					<h2>TypeScript (*.ts)</h2>
+					<ul>
+						<li>Developed by Microsoft</li>
+						<li class="fragment">Superset of JavaScript</li>
+						<li class="fragment">Statically typed</li>
+						<li class="fragment">Catch a lot of errors/bugs in compile time</li>
+						<li class="fragment">More clear inheritance</li>
+						<li class="fragment">Annotations/Decorator</li>
+						<li class="fragment">Advanced autocompletion</li>
+						<li class="fragment">Navigation</li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>Architecture</h3>
+					<img src="images/architecture.png" width="1024" alt="Architecture" />
+				</section>
+				<section>
+					<h3>Initialisation</h3>
+					<pre><code class="hljs" data-trim >
+						import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+						
+						import { AppModule } from './app/app.module';
+						
+						platformBrowserDynamic().bootstrapModule(AppModule)
+						.catch(err => console.error(err));
+					</code></pre>
+				</section>
+				<section>
+					<h3>NgModule</h3>
+					<ul>
+						<li>The basic building blocks of an Angular application are NgModules</li>
+						<li>Every Angular app has at least one NgModule class, the root module, which is conventionally named AppModule</li>
+						<li>An NgModule is defined by a class decorated with @NgModule().</li>
+					</ul>
+					<pre><code class="hljs" data-trim >
+						import { NgModule }      from '@angular/core';
+						import { BrowserModule } from '@angular/platform-browser';
+						@NgModule({
+							imports:      [ BrowserModule ],
+							providers:    [ Logger ],
+							declarations: [ AppComponent ],
+							exports:      [ AppComponent ],
+							bootstrap:    [ AppComponent ]
+						})
+						export class AppModule { }
+					</code></pre>
+					<aside class="notes">
+					</aside>
+				</section>
+				<section>
+					<h3>Build-in NgModules</h3>
+					<pre><img src="images/ng_modules.png" alt="popular-ng-modules"/></pre>
+				</section>
+				<section>
+					<h3>Components</h3>
+					<img src="images/architecture.png" width="1024" alt="Architecture" />
+				</section>
+				<section>
+					<h4>@Component</h4>
+					<span>A component controls a patch of screen called a view</span>
+					<pre><code class="hljs" data-trim >
+						<root-template>
+							<header-component></header-component>
+							<list-component>
+								<item-component></item-component>
+								<item-component></item-component>
+								<item-component></item-component>
+							</list-component>
+							<footer-component></footer-component>
+						</root-template>
+					</code></pre>
+				</section>
+				<section>
+					<h4>@Component</h4>
+					<pre><code class="hljs" data-trim >
+					@Component({
+						selector:    'app-tag',
+						templateUrl: './app-tag.component.html',
+						template: 'inline template'
+						providers:  [ RssInfoService ]
+					})
+					export class RssDataComponent implements OnInit {
+					/* . . . */
+					}
+					</code></pre>
+					<aside class="notes">The metadata for a component tells Angular where to get the major building blocks that it
+						needs to create and present
+						the component and its view. In particular, it associates a template with the component, either directly with
+						inline
+						code, or by reference. Together, the component and its template describe a view.</aside>
+				</section>
+				<section>
+					<h4>Template</h4>
+					<pre>
+						<code class="hljs" data-trim >
+							<p><i>Some text</i></p>
+							<ul>
+								<li *ngFor="let padawan of padawans" (click)="selectPadawan(padawan)">
+									{{padawan.githubAccount}}
+								</li>
+							</ul>
+							<app-padawan-detail [padawan]="selectedPadawan"></app-padawan-detail>
+						</code>
+					</pre>
+					<ul>
+						<li class="fragment">Regular HTML with additional template syntax</li>
+						<li class="fragment">Can use data binding to coordinate the app and DOM data</li>
+						<li class="fragment">Can use pipes to transform data before it is displayed</li>
+						<li class="fragment">Can use directives to apply app logic to what gets displayed.</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>A template is a form of HTML that tells Angular how to render the component.</li>
+							<li>The template immediately associated with a component defines that component's host view. The component can
+								also define
+								a view hierarchy, which contains embedded views, hosted by other components.</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h4>@Directive</h4>
+					<span>Transform DOM based on some conditions/rules</span>
+					<ul>
+						<li>Structural directives</li>
+						<pre><code class="hljs" data-trim>
+							<li *ngFor="let padawan of padawans">
+								/* . . . */
+							</li>
+						</code></pre>
+						<li>Attribute directives</li>
+						<pre><code class="hljs" data-trim><input [(ngModel)]="hero.name"/></code></pre>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>Structural directives alter layout by adding, removing, and replacing elements in the DOM</li>
+							<li>Attribute directives alter the appearance or behavior of an existing element</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h4>Data Binding</h4>
+					<img class="image-aside" src="images/databinding.png" alt="databinding" />
+					<p>Angular supports two-way data binding, a mechanism for coordinating the parts of a template with the parts of a
+						component.</p>
+					<ol style="clear: both;">
+						<li>Interpolation:
+							<pre><code class="hljs" data-trim>{{padawan.githubAccount}}</code></pre>
+						</li>
+						<li>Property binding:
+							<pre><code class="hljs" data-trim><app-padawan-detail [padawan]="selectedPadawan"></app-padawan-detail></code></pre>
+						</li>
+						<li>Event binding:
+							<pre><code class="hljs" data-trim><li (click)="selectPadawan(padawan)">...</li></code></pre>
+						</li>
+					</ol>
+					<aside class="notes">
+						<ul>
+							<li>Data binding plays an important role in communication between a template and its component, and is also
+								important for
+								communication between parent and child components.</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h4>Service/@Injectable()</h4>
+					<pre><code class="hljs" data-trim>
+						@Injectable()
+						export class Logger {
+							log(msg: any)   { console.log(msg); }
+							error(msg: any) { console.error(msg); }
+							warn(msg: any)  { console.warn(msg); }
+						}
+					</code></pre>
+				</section>
+				<!--section>
+					<h3>Dependency Injection</h3>
+					<img src="images/architecture.png" width="1024" alt="Architecture" />
+				</section-->
+				<section>
+					<p>Dependency Injection</p>
+					<img src="images/injector-injects.png" alt="dependency injection" />
+				</section>
+				<section>
+					<p>Autowire/Inject dependencies</p>
+					<pre><code class="hljs" data-trim>
+							@Injectable({
+								providedIn: 'root'|ModuleName,
+							})
+						</code></pre>
+					<pre class="fragment"><code class="hljs" data-trim>
+							@NgModule({
+								providers: [
+									BackendService,
+									Logger
+								],
+							...
+							})
+						</code></pre>
+					<pre class="fragment"><code class="hljs" data-trim >
+							@Component({
+								providers: [
+									BackendService,
+									Logger
+								],
+							...
+							})
+						</code></pre>
+				</section>
+			</section>
+			<section>
+				<h2>Thanks</h2>
+			</section>
 		</div>
+	</div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		Reveal.initialize({
+			dependencies: [
+				{ src: 'plugin/markdown/marked.js' },
+				{ src: 'plugin/markdown/markdown.js' },
+				{ src: 'plugin/notes/notes.js', async: true },
+				{ src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+			]
+		});
+	</script>
+</body>
+
 </html>

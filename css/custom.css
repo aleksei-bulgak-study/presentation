@@ -1,0 +1,14 @@
+.reveal section>img.logo {
+  box-shadow: none;
+  border: none;
+  background: transparent;
+}
+
+.reveal section>ul,
+.reveal section>ol {
+  font-size: 0.7em;
+}
+
+.image-aside {
+  float: left;
+}
