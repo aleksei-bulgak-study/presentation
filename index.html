@@ -40,6 +40,18 @@
 						<li class="fragment">Uses <a href="http://www.typescriptlang.org/">TypeScript</a> language</li>
 					</ul>
 				</section>
+				<section>
+					<h3>History</h3>
+					<ol>
+						<li>AngularJS first released on 20 October 2010</li>
+						<li>On April 30, 2015, the Angular developers announced Angular 2 on September 14, 2016.</li>
+						<li>3 version was skipped :)</li>
+						<li>On 13 December 2016 Angular 4 was announced (HttpClient, Route life cycle and more)</li>
+						<li>Angular 5 was released on November 1, 2017.(support for Material Design)</li>
+						<li>Angular 6 was released on May 4, 2018.</li>
+						<li>Angular 7 was released on October 18, 2018.(Updates regarding Application Performance, Angular Material & CDK, Virtual Scrolling, Improved Accessibility of Selects)</li>
+					</ol>
+				</section>
 			</section>
 			<section>
 				<section>
@@ -62,21 +74,19 @@
 			<section>
 				<section>
 					<h3>Architecture</h3>
-					<img src="images/architecture.png" width="1024" alt="Architecture" />
+					<img src="images/architecture.png" width="700" alt="Architecture" />
 				</section>
 				<section>
-					<h3>Initialisation</h3>
-					<pre><code class="hljs" data-trim >
-						import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-						
-						import { AppModule } from './app/app.module';
-						
-						platformBrowserDynamic().bootstrapModule(AppModule)
-						.catch(err => console.error(err));
-					</code></pre>
+					<h3>Main structures</h3>
+					<ul>
+						<li>@NgModule</li>
+						<li>@Component</li>
+						<li>@Directive</li>
+						<li>@Service</li>
+					</ul>
 				</section>
 				<section>
-					<h3>NgModule</h3>
+					<h3>@NgModule</h3>
 					<ul>
 						<li>The basic building blocks of an Angular application are NgModules</li>
 						<li>Every Angular app has at least one NgModule class, the root module, which is conventionally named AppModule</li>
@@ -98,8 +108,44 @@
 					</aside>
 				</section>
 				<section>
+					<h3>Initialisation</h3>
+					<pre><code class="hljs" data-trim >
+						import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+						
+						import { AppModule } from './app/app.module';
+						
+						platformBrowserDynamic().bootstrapModule(AppModule)
+						.catch(err => console.error(err));
+					</code></pre>
+				</section>
+				<section>
 					<h3>Build-in NgModules</h3>
 					<pre><img src="images/ng_modules.png" alt="popular-ng-modules"/></pre>
+				</section>
+				<section>
+					<h3>Example</h3>
+					<pre>
+						<code class="hljs" data-trim >
+							@NgModule({
+								imports: [
+									BrowserModule,
+									FormsModule,
+									AppRoutingModule,
+									HttpClientModule,
+								],
+								declarations: [
+									AppComponent,
+									DashboardComponent,
+									HeroesComponent,
+									HeroDetailComponent,
+									MessagesComponent,
+									HeroSearchComponent
+								],
+								bootstrap: [ AppComponent ]
+							})
+							export class AppModule { }
+						</code>
+					</pre>
 				</section>
 				<section>
 					<h3>Components</h3>
@@ -141,6 +187,7 @@
 				</section>
 				<section>
 					<h4>Template</h4>
+					<p>Regular HTML with additional Angular template syntax</p>
 					<pre>
 						<code class="hljs" data-trim >
 							<p><i>Some text</i></p>
@@ -152,12 +199,6 @@
 							<app-padawan-detail [padawan]="selectedPadawan"></app-padawan-detail>
 						</code>
 					</pre>
-					<ul>
-						<li class="fragment">Regular HTML with additional template syntax</li>
-						<li class="fragment">Can use data binding to coordinate the app and DOM data</li>
-						<li class="fragment">Can use pipes to transform data before it is displayed</li>
-						<li class="fragment">Can use directives to apply app logic to what gets displayed.</li>
-					</ul>
 					<aside class="notes">
 						<ul>
 							<li>A template is a form of HTML that tells Angular how to render the component.</li>
@@ -166,6 +207,19 @@
 								a view hierarchy, which contains embedded views, hosted by other components.</li>
 						</ul>
 					</aside>
+				</section>
+				<section>
+					<h3>Example</h3>
+					<pre><code class="hljs" data-trim>
+							@Component({
+								selector: 'app-root',
+								templateUrl: './app.component.html',
+								styleUrls: ['./app.component.css']
+							})
+							export class AppComponent {
+								title = 'Tour of Heroes';
+							}
+					</code></pre>
 				</section>
 				<section>
 					<h4>@Directive</h4>
