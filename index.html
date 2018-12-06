@@ -31,6 +31,11 @@
 				<section>
 					<h1>Angular</h1>
 					<img class="logo" src="./images/logo.png" width="500" height="500" alt="angular-logo" />
+					<aside class="notes">
+						<p>
+							Hello. Today I will talk to you about Angular.
+						</p>
+					</aside>
 				</section>
 				<section>
 					<h2>What is Angular</h2>
@@ -39,6 +44,11 @@
 						<li class="fragment">Developed by Google</li>
 						<li class="fragment">Uses <a href="http://www.typescriptlang.org/">TypeScript</a> language</li>
 					</ul>
+					<aside class="notes">
+						<p>
+							Angular is a web framework developed by Google and the latest version of Angular is written in TypeScript.
+						</p>
+					</aside>
 				</section>
 				<section>
 					<h3>History</h3>
@@ -49,8 +59,13 @@
 						<li>On 13 December 2016 Angular 4 was announced (HttpClient, Route life cycle and more)</li>
 						<li>Angular 5 was released on November 1, 2017.(support for Material Design)</li>
 						<li>Angular 6 was released on May 4, 2018.</li>
-						<li>Angular 7 was released on October 18, 2018.(Updates regarding Application Performance, Angular Material & CDK, Virtual Scrolling, Improved Accessibility of Selects)</li>
+						<li>Angular 7 was released on October 18, 2018.(Updates regarding Application Performance, Angular Material &
+							CDK, Virtual Scrolling, Improved Accessibility of Selects)</li>
 					</ol>
+					<aside class="notes">
+						<p>The history of Angular presented on the current slide.</p>
+						<p>The main changes were brought between the first and second version, cause second version was fully rewritten using TypeScript</p>
+					</aside>
 				</section>
 			</section>
 			<section>
@@ -69,12 +84,29 @@
 						<li class="fragment">Advanced autocompletion</li>
 						<li class="fragment">Navigation</li>
 					</ul>
+					<aside class="notes">
+						<ul>
+							<li>TypeScript is language developed by Microsoft. </li>
+							<li>It is a superset of JavaScript and its main feature is that it is
+								statically typed.</li>
+							<li>This gives you the ability to catch a lot of errors, mistakes and find bugs at compilation phase and not
+								during
+								runtime.</li>
+							<li>Also Angular provides more clear inheritance, some additional structures like Decorator.</li>
+							<li>Modern IDEs have better support of statically typed languages and provide you code autocompletion and better
+								navigation.
+							</li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 			<section>
 				<section>
 					<h3>Architecture</h3>
 					<img src="images/architecture.png" width="700" alt="Architecture" />
+					<aside class="notes">
+						<p>So let's take a look at Angular architecture.</p>
+					</aside>
 				</section>
 				<section>
 					<h3>Main structures</h3>
@@ -84,6 +116,11 @@
 						<li>@Directive</li>
 						<li>@Service</li>
 					</ul>
+					<aside class="notes">
+						<p>Today we will talk about such structurer of Angular and start with NgModule.</p>
+						<p>Angular it is a modular framework and it is divided into small pieces called modules.</p>
+						<p>Angular supports ES6 modules and also provides a structure called NgModule.</p>
+					</aside>
 				</section>
 				<section>
 					<h3>@NgModule</h3>
@@ -105,6 +142,15 @@
 						export class AppModule { }
 					</code></pre>
 					<aside class="notes">
+						<p>NgModule it is a basic JS class with additional decorator called @NgModule with metadata.</p>
+						<p>In metadata, you can specify: </p>
+						<ul>
+							<li>other modules that you want to import in your module.</li>
+							<li>You can use @Components from imported modules.</li>
+							<li>You can specify services, Components that you want to render</li>
+							<li>You can specify Components that you want to export.</li>
+							<li>And modules that will import your module can use exported components.</li>
+						</ul>
 					</aside>
 				</section>
 				<section>
@@ -117,10 +163,17 @@
 						platformBrowserDynamic().bootstrapModule(AppModule)
 						.catch(err => console.error(err));
 					</code></pre>
+					<aside class="notes">
+						<p>Model is a basic building block and entry point of your application. During startup, you need to specify some
+							module.</p>
+					</aside>
 				</section>
 				<section>
 					<h3>Build-in NgModules</h3>
 					<pre><img src="images/ng_modules.png" alt="popular-ng-modules"/></pre>
+					<aside class="notes">
+						<p>Angular support built-in modules and you can use them out of the box.</p>
+					</aside>
 				</section>
 				<section>
 					<h3>Example</h3>
@@ -165,6 +218,10 @@
 							<footer-component></footer-component>
 						</root-template>
 					</code></pre>
+					<aside class="notes">
+						<p>A component is a basic building block of an Angular application.</p>
+						<p>Components can be chained or can be organized in complex structures.</p>
+					</aside>
 				</section>
 				<section>
 					<h4>@Component</h4>
@@ -179,11 +236,15 @@
 					/* . . . */
 					}
 					</code></pre>
-					<aside class="notes">The metadata for a component tells Angular where to get the major building blocks that it
-						needs to create and present
-						the component and its view. In particular, it associates a template with the component, either directly with
-						inline
-						code, or by reference. Together, the component and its template describe a view.</aside>
+					<aside class="notes">
+						<p>The Component also a JS class with its own Decorator(@Component).</p>
+						<p>You can specify services that you want to use/inject in Component's metadata.</p>
+						<p>A component can not exist without a template file. Template it is an HTML file that you can specify as a value in templateURL or you can use an inline template and specify it in template property.</p>
+
+						<p>The metadata for a component tells Angular where to get the major building blocks that it needs to create and present the component and its view.</p>
+						<p>In particular, it associates a template with the component, either directly with inline code, or by reference.</p>
+						<p>Together, the component and its template describe a view.</p>
+					</aside>
 				</section>
 				<section>
 					<h4>Template</h4>
@@ -200,6 +261,7 @@
 						</code>
 					</pre>
 					<aside class="notes">
+						<p>Template it is a basic HTML file with additional Angular syntax.</p>
 						<ul>
 							<li>A template is a form of HTML that tells Angular how to render the component.</li>
 							<li>The template immediately associated with a component defines that component's host view. The component can
@@ -235,9 +297,11 @@
 						<pre><code class="hljs" data-trim><input [(ngModel)]="hero.name"/></code></pre>
 					</ul>
 					<aside class="notes">
+						<p>In some cases, we can perform actions with DOM. You can create your own directive or use built-in directive.
+							Currently Angular support 2 types of directive:</p>
 						<ul>
-							<li>Structural directives alter layout by adding, removing, and replacing elements in the DOM</li>
-							<li>Attribute directives alter the appearance or behavior of an existing element</li>
+							<li>Structural directive. It changes DOM structure</li>
+							<li>Attribute directive. It updates attributes of DOM elements and does not create new DOM elements</li>
 						</ul>
 					</aside>
 				</section>
@@ -258,7 +322,17 @@
 						</li>
 					</ol>
 					<aside class="notes">
-						<ul>
+						<p>When we have components and templates then we want to configure some interaction between this structures.</p>
+						<p>Without Angular, you need to code this interaction by your own(query dom and using events).</p>
+						<p>Angular supports 3 types of data binding:</p>
+						<ul>Interpolation. Renders values from Components on Template.
+							<li>Property Binding. Help to interact between child and parent components. Values from parent components can be
+								passed
+								to child component</li>
+							<li>Event binding. Reverse action - trigger changes in parent component based on changes in child component. For
+								example,
+								'click' event on child component can call a method from a parent component.
+							</li>
 							<li>Data binding plays an important role in communication between a template and its component, and is also
 								important for
 								communication between parent and child components.</li>
@@ -275,14 +349,18 @@
 							warn(msg: any)  { console.warn(msg); }
 						}
 					</code></pre>
+					<aside class="notes">
+						<p>As Angular is modular framework developers decided to split logic related to HTML rendering and logic related to calculation or HTTP communication.</p>
+						<p>Angular provides service with the help of Injector instance.</p>
+					</aside>
 				</section>
-				<!--section>
-					<h3>Dependency Injection</h3>
-					<img src="images/architecture.png" width="1024" alt="Architecture" />
-				</section-->
 				<section>
 					<p>Dependency Injection</p>
 					<img src="images/injector-injects.png" alt="dependency injection" />
+					<aside class="notes">
+						<p>The idea of DI is that dependency is injected with a side component that manages dependencies.</p>
+						<p>When Component/NgModule needs some dependencies it asks Injector for it and Injector checks and provides dependency if it already has an instance of it or creates a new instance and return it to the consumer.</p>
+					</aside>
 				</section>
 				<section>
 					<p>Autowire/Inject dependencies</p>
@@ -309,6 +387,14 @@
 							...
 							})
 						</code></pre>
+						<aside class="notes">
+							<p>Angular supports 3 types of injection.</p>
+							<ul>
+								<li>First is to specify 'provideIn' property in @Injectable decorator. You can specify a value as 'root' and in this case, Injector creates a singleton instance of this service and provides it to all consumers.</li>
+								<li>The second way is to specify a list of providers in NgModule decorator. As a result, this module will have access to specified services.</li>
+								<li>And we can specify services in @Component's metadata</li>
+							</ul>
+						</aside>
 				</section>
 			</section>
 			<section>
